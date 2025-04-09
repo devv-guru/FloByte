@@ -1,0 +1,29 @@
+Business Source License 1.1
+
+Parameters
+
+Licensor: Deon van Vuuren (FloByte)
+
+Licensed Work: The FloByte source code repository, located at https://github.com/[your-org-or-user]/flobyte
+
+Change Date: April 9, 2028
+
+Change License: Apache License, Version 2.0
+
+Terms
+
+The Business Source License 1.1 ("BUSL") is an agreement between the Licensor and You, the recipient of the Licensed Work. This license allows you to view, modify, and share the code, but not to use it in production or commercial settings without a separate commercial license.
+
+The Licensed Work is subject to the terms of the BUSL 1.1, available at https://mariadb.com/busl/busl-faq/
+
+Use Limitation
+
+You may use the Licensed Work for any purpose **except** production or commercial use. For any such use, a separate commercial agreement with the Licensor is required.
+
+Change License
+
+On the Change Date, the Licensed Work will automatically convert to the Change License, currently set as the Apache License, Version 2.0.
+
+If you have questions or would like to inquire about a production license, please contact: [your-email@example.com]
+
+Copyright (C) 2025 Deon van Vuuren. All rights reserved.
