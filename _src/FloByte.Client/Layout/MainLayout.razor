@@ -1,16 +1,28 @@
 @inherits LayoutComponentBase
 
-<main>
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="content">
-            @Body
+<div class="min-h-screen bg-gray-100">
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-8 w-auto" src="logo.svg" alt="FloByte">
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <Authentication />
+                </div>
+            </div>
         </div>
+    </nav>
+
+    <div class="flex">
+        <NavMenu />
+        <main class="flex-1 p-8">
+            @Body
+        </main>
     </div>
-</main>
+</div>
 
 <style>
     main {
