@@ -1,0 +1,77 @@
+﻿@inherits TopBarBase
+
+<header class="sticky top-0 z-40 flex h-16 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-xs lg:px-8">
+  <!-- Mobile menu toggle -->
+  <button class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @onclick="OnToggleSidebar">
+    <span class="sr-only">Open sidebar</span>
+    <i class="fa-solid fa-bars h-6 w-6" aria-hidden="true"></i>
+  </button>
+
+  <!-- Breadcrumbs -->
+  @if (Breadcrumbs?.Any() == true)
+  {
+    <nav aria-label="Breadcrumb" class="hidden sm:flex sm:items-center sm:space-x-2">
+      @foreach (var crumb in Breadcrumbs.Take(Breadcrumbs.Count() - 1))
+      {
+        <NavLink href="@crumb.Url" class="text-sm text-gray-500 hover:text-gray-700">
+          @crumb.Title
+        </NavLink>
+        <i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+      }
+      <span class="text-sm font-medium text-gray-900">
+        @Breadcrumbs.Last().Title
+      </span>
+    </nav>
+  }
+
+  <div class="flex flex-1 gap-x-4">
+    <!-- Search -->
+    <form class="relative flex-1" @onsubmit:preventDefault>
+      <input
+        type="search"
+        placeholder="Search"
+        class="block w-full bg-white pl-8 pr-3 py-2 text-base text-gray-900 placeholder-gray-400 outline-none rounded-md border border-gray-200 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+      />
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    </form>
+
+    <!-- Notifications -->
+    <button class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+      <span class="sr-only">View notifications</span>
+      <i class="fa-solid fa-bell h-6 w-6" aria-hidden="true"></i>
+    </button>
+
+    <!-- Profile dropdown -->
+    <div class="relative">
+      <button class="-m-1.5 flex items-center p-1.5" @onclick="ToggleProfileMenu">
+        <span class="sr-only">Open user menu</span>
+        @if (!string.IsNullOrEmpty(AvatarUrl))
+        {
+          <img class="h-8 w-8 rounded-full bg-gray-50" src="@AvatarUrl" alt="@($"{FirstName} {LastName}")" />
+        }
+        else
+        {
+          <div class="h-8 w-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-medium">
+            @Initials
+          </div>
+        }
+        <span class="hidden lg:flex lg:items-center ml-3">
+          <span class="text-sm font-semibold text-gray-900">@FirstName @LastName</span>
+          <i class="fa-solid fa-chevron-down ml-2 text-gray-400"></i>
+        </span>
+      </button>
+
+      @if (_profileOpen)
+      {
+        <div class="absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5">
+          <a href="profile" class="block px-3 py-1 text-sm text-gray-900 hover:bg-gray-50">Your profile</a>
+          <a href="logout"  class="block px-3 py-1 text-sm text-gray-900 hover:bg-gray-50">Sign out</a>
+        </div>
+      }
+    </div>
+  </div>
+</header>
+
+@code {
+  
+}

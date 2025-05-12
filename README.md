@@ -1,9 +1,10 @@
-
 # ⚙️ FloByte
 
 **FloByte** is a modern workflow engine and orchestration server built entirely in .NET, designed with AI at its core. From drag-and-drop visual workflows to custom NuGet-based extensions, FloByte empowers developers to build intelligent, modular, and scalable automation solutions fast.
 
 Whether you're connecting services, deploying agents, or scripting actions, FloByte gives you a full-featured, flexible platform to streamline your ideas into production workflows.
+
+FloByte is built on Clean Architecture principles with CQRS pattern, making it highly maintainable and extensible for .NET developers and DevOps teams working with data integration, automation, and API orchestration.
 
 ---
 
@@ -15,6 +16,10 @@ Whether you're connecting services, deploying agents, or scripting actions, FloB
 - 💻 **Built-in .NET Code Editor** – Customize logic directly within the platform
 - 📦 **Pluggable Storage and Configuration** – Use local, cloud, or custom sources
 - 🛠️ **Low-Footprint, Container-Ready** – Lightweight and easy to deploy anywhere
+- 🔄 **Docker-based API Orchestration** – Seamless integration with Docker containers
+- 🔒 **Role-based Access Control** – Secure workflow management with user roles
+- 🌓 **Light/Dark Themes** – Blazor WASM UI with customizable themes
+- 🔍 **Robust Logging & Monitoring** – Comprehensive execution tracking
 
 ---
 
@@ -22,7 +27,7 @@ Whether you're connecting services, deploying agents, or scripting actions, FloB
 
 ```bash
 # Clone the repo
-git clone https://github.com/[your-org-or-username]/flobyte.git
+git clone https://github.com/devv-guru/FloByte.git
 cd flobyte
 
 # Build the solution
@@ -40,12 +45,25 @@ FloByte will launch locally and expose a web UI for workflow creation and manage
 
 ## 🧱 Architecture
 
-FloByte is designed with modularity and extensibility at its core:
+FloByte is designed with Clean Architecture principles and CQRS pattern at its core:
 
-- `FloByte.Server` – Host + API for workflow execution
-- `FloByte.Designer` – Blazor-based visual interface
+### Frontend
+- `FloByte.Designer` – Blazor WebAssembly standalone application
+- Tailwind CSS v4.1 for styling with light/dark themes
+- Drag-and-drop workflow canvas with quick-edit pane and full-screen node editor
+
+### Backend
+- `FloByte.Server` – ASP.NET Core API using Minimal APIs
+- `FloByte.Application` – Application layer with CQRS using Martin Othamar's Mediator library
+- `FloByte.Domain` – Domain models and business logic
+- `FloByte.Infrastructure` – EF Core for persistence with MS SQL/SQLite support
 - `FloByte.SDK` – Interfaces and tools for building custom steps, agents, and integrations
 - `FloByte.Agent` – Background and AI execution engine
+
+### Node System
+- Dynamic loading of nodes from NuGet packages
+- Docker orchestration via Docker.DotNet
+- Parameter extraction and type mapping from JSON Schema
 
 ---
 
@@ -58,6 +76,13 @@ FloByte supports multiple NuGet sources and allows custom packages that define:
 - Data connectors
 - Notification handlers
 - And more...
+
+The Node Loader system:
+- Scans configured NuGet feeds
+- Downloads and validates package metadata
+- Resolves dependencies with semantic versioning support
+- Loads assemblies via reflection
+- Instantiates `IWorkflowNode` implementations
 
 You can publish your own packages and install them through the UI or config.
 
@@ -89,7 +114,7 @@ You are free to:
 
 > This code will convert to [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) on **April 9, 2028**.
 
-To inquire about a commercial license, contact: **[your-email@example.com]**
+To inquire about a commercial license, contact: **contact@flobyte.io**
 
 ---
 
@@ -99,6 +124,19 @@ To inquire about a commercial license, contact: **[your-email@example.com]**
 - Discussions: [GitHub Discussions](https://github.com/devv-guru/FloByte/discussions)
 - Issues: [GitHub Issues](https://github.com/devv-guru/FloByte/issues)
 - License FAQ: [BUSL-1.1 FAQ](https://mariadb.com/busl/busl-faq/)
+
+## 🔑 Key Principles
+
+1. **Simplicity**: Intuitive drag-and-drop workflow builder
+2. **Flexibility**: Support for code, NuGet packages, and external APIs
+3. **Extensibility**: Plugin architecture and custom node support
+4. **Reliability**: Robust execution, logging, and monitoring
+
+## 🎯 Success Metrics
+
+- Time to first workflow < 5 minutes
+- 90% uptime SLA
+- Community adoption (stars, contributions)
 
 ---
 

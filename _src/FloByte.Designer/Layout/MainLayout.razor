@@ -1,0 +1,22 @@
+@inherits LayoutComponentBase
+
+<NavMenu @ref="_navMenu" />
+
+<div class="lg:pl-72">
+    <TopBar ToggleSidebar="ToggleSidebar" />
+
+    <main class="py-10">
+        <div class="px-4 sm:px-6 lg:px-8">
+            @Body
+        </div>
+    </main>
+</div>
+
+@code {
+    private NavMenu _navMenu;
+    
+    private void ToggleSidebar()
+    {
+        _navMenu.ToggleSidebar();
+    }
+}

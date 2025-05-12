@@ -1,0 +1,1 @@
+tailwindcss -i wwwroot\css\app.css -o wwwroot\css\app.css -m

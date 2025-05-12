@@ -1,0 +1,6 @@
+@FloByte.Server_HostAddress = http://localhost:5187
+
+GET {{FloByte.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

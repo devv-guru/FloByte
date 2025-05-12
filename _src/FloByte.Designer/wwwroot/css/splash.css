@@ -1,0 +1,52 @@
+#splash {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f4f6; /* light gray */
+    transition: background-color 0.5s;
+    z-index: 9999;
+}
+/* Dark theme support */
+.dark #splash {
+    background-color: #111827; /* dark gray */
+}
+/* Logo pulse animation */
+/*@keyframes pulse {*/
+/*    0%, 100% { opacity: 1; transform: scale(1); }*/
+/*    50% { opacity: 0.7; transform: scale(1.1); }*/
+/*}*/
+#splash img {
+    width: 8rem;
+    height: 8rem;
+    animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite;
+}
+/* Dots loader using project green */
+.dots {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: rgba(2,164,105,1); /* green from logo */
+    border-radius: 50%;
+    animation: bounce 0.8s infinite ease-in-out;
+}
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+/* Slightly lighter green for dark mode */
+.dark .dot {
+    background-color: rgba(52,214,155,1);
+}
+@keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-0.75rem); }
+}
