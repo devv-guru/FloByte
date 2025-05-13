@@ -1,1 +1,1 @@
-tailwindcss -i wwwroot\css\app.css -o wwwroot\css\app.css -w
+tailwindcss -i wwwroot\css\app.css -o wwwroot\css\app.min.css -w

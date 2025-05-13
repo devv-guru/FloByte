@@ -1,4 +1,4 @@
-﻿namespace FloByte.Designer.Components.Topbar;
+﻿namespace FloByte.Designer.Components.Navigation;
 
 public class BreadcrumbItem
 {

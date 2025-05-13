@@ -1,22 +1,31 @@
 @inherits LayoutComponentBase
 
-<NavMenu @ref="_navMenu" />
-
-<div class="lg:pl-72">
-    <TopBar ToggleSidebar="ToggleSidebar" />
-
-    <main class="py-10">
-        <div class="px-4 sm:px-6 lg:px-8">
-            @Body
-        </div>
-    </main>
+<div class="flex flex-col h-full bg-gray-50 dark:bg-gray-900">
+    <TwTopbar ToggleSidebar="ToggleSidebar" />
+    
+    <div class="h-[calc(100%-theme('spacing.16'))] flex flex-1 overflow-hidden">
+        <TwNavMenu @ref="_navMenu" IsCollapsed="@_isCollapsed" IsCollapsedChanged="@OnIsCollapsedChanged" />
+        
+        <main class="h-[calc(100%-theme('spacing.16'))] flex-1 overflow-auto">
+            <div class="px-4 sm:px-6 lg:px-8 py-10">
+                @Body
+            </div>
+        </main>
+    </div>
 </div>
 
 @code {
-    private NavMenu _navMenu;
+    private TwNavMenu _navMenu;
+    private bool _isCollapsed;
     
-    private void ToggleSidebar()
+    private async Task ToggleSidebar()
     {
-        _navMenu.ToggleSidebar();
+        await _navMenu.ToggleSidebar();
+    }
+
+    private void OnIsCollapsedChanged(bool value)
+    {
+        _isCollapsed = value;
+        StateHasChanged();
     }
 }

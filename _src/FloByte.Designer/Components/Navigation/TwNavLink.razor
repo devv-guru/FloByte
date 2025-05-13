@@ -1,0 +1,64 @@
+﻿<NavLink
+    class="@($"group flex items-center gap-x-3 rounded-md p-2 text-sm font-semibold transition-colors duration-200 text-gray-700 hover:bg-gray-50 hover:text-green-500 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-green-300 {AdditionalCssClass}")"
+    href="@Href"
+    Match="@Match"
+    ActiveClass="@($"bg-gray-50 text-green-500 dark:bg-gray-800 dark:text-green-300 {ActiveCssClass}")">
+    <i class="@($"{IconClass} fa-xl {(IsActive ? "text-green-500 dark:text-green-300" : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400")}")" aria-hidden="true"></i>
+    @if (ChildContent != null)
+    {
+        <span class="truncate">@ChildContent</span>
+    }
+</NavLink>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Href { get; set; } = default!;
+
+    // Renamed CssClass to AdditionalCssClass and removed its default value here,
+    // as default styles are now part of the main class string above.
+    [Parameter]
+    public string AdditionalCssClass { get; set; } = "";
+
+    [Parameter]
+    public string ActiveCssClass { get; set; } = "";
+
+    [Parameter]
+    public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+
+    [Parameter, EditorRequired]
+    public string IconClass { get; set; } = default!;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private bool IsActive
+    {
+        get
+        {
+            var currentUri = NavigationManager.Uri;
+            var absoluteHref = NavigationManager.ToAbsoluteUri(Href).AbsolutePath;
+            var currentPath = NavigationManager.ToAbsoluteUri(currentUri).AbsolutePath;
+
+            if (Match == NavLinkMatch.All)
+            {
+                return currentPath.Equals(absoluteHref, StringComparison.OrdinalIgnoreCase);
+            }
+
+            // Ensure trailing slash consistency for prefix matching if Href is "/"
+            if (absoluteHref == "/" && currentPath != "/")
+            {
+                 return currentPath.StartsWith(absoluteHref, StringComparison.OrdinalIgnoreCase);
+            }
+            else if (absoluteHref != "/") // For other Hrefs, ensure it's a true prefix
+            {
+                 return currentPath.StartsWith(absoluteHref, StringComparison.OrdinalIgnoreCase) &&
+                       (currentPath.Length == absoluteHref.Length || currentPath[absoluteHref.Length] == '/');
+            }
+            // If Href is "/" and currentPath is also "/", it's an exact match handled by NavLinkMatch.All or implicitly here.
+            return currentPath.Equals(absoluteHref, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
+}
