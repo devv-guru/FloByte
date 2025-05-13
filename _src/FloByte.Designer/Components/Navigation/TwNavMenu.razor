@@ -1,0 +1,78 @@
+<div
+class="@($"flex flex-col {(IsCollapsed ? "w-12" : "w-72")} transition-all duration-300 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800")">
+    <div class="@($"flex grow flex-col gap-y-5 overflow-y-auto pb-4 {(IsCollapsed ? "px-2" : "px-6")}")">
+        <nav class="flex flex-1 flex-col">
+            <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                <li>
+                    <ul role="list" class="-mx-2 space-y-3 mb-2">
+                        <li>
+                            <TwNavLink
+                                Href="/"
+                                IconClass="fa-solid fa-house"
+                                AdditionalCssClass="@(IsCollapsed ? "justify-center" : "")"
+                                Match="NavLinkMatch.All">
+                                @if (!IsCollapsed)
+                                {
+                                    <span>Dashboard</span>
+                                }
+                            </TwNavLink>
+                        </li>
+                        <li>
+                            <TwNavLink
+                                Href="/workflows"
+                                IconClass="fa-solid fa-diagram-project"
+                                AdditionalCssClass="@(IsCollapsed ? "justify-center" : "")">
+                                @if (!IsCollapsed)
+                                {
+                                    <span>Workflows</span>
+                                }
+                            </TwNavLink>
+                        </li>
+                        <li>
+                            <TwNavLink
+                                Href="/nodes"
+                                IconClass="fa-solid fa-cube"
+                                AdditionalCssClass="@(IsCollapsed ? "justify-center" : "")">
+                                @if (!IsCollapsed)
+                                {
+                                    <span>Nodes</span>
+                                }
+                            </TwNavLink>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mt-auto">
+                    <ul role="list" class="-mx-2 space-y-1">
+                        <li>
+                            <TwNavLink
+                                Href="/settings"
+                                IconClass="fa-solid fa-gear"
+                                AdditionalCssClass="@(IsCollapsed ? "justify-center" : "")">
+                                @if (!IsCollapsed)
+                                {
+                                    <span>Settings</span>
+                                }
+                            </TwNavLink>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public bool IsCollapsed { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> IsCollapsedChanged { get; set; }
+
+    public async Task ToggleSidebar()
+    {
+        IsCollapsed = !IsCollapsed;
+        await IsCollapsedChanged.InvokeAsync(IsCollapsed);
+    }
+}

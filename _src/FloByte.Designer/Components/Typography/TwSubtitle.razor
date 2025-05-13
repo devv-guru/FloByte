@@ -1,0 +1,13 @@
+@namespace FloByte.Designer.Components.Typography
+
+<h2 class="text-3xl font-semibold text-gray-900 dark:text-white mb-4 @Class">
+    @ChildContent
+</h2>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Class { get; set; } = "";
+}
